@@ -1,0 +1,14 @@
+.main{width:100%;overflow:hidden;}
+.main .left{float:left;width:352px;height:352px;position:absolute;}
+.main .right{float:left;width:500px;overflow:hidden;margin-left:750px;margin-top:50px;}
+.s-box{position:absolute;left:50px;top:50px;width:282px;height:282px;}
+.s-box img{width:282px;height:282px;display:block;}
+.s-box span{position:absolute;width:74px;height:74px;background:rgba(200,200,200,.5);left:0;top:0;
+			display:none;}
+.s-box em{width:282px;height:282px;position: absolute;left:0;top:0;}
+.b-box {position:absolute;left:450px;top:50px;width:282px;height:282px;overflow:hidden;display:none;}
+.b-box img{width:864px;height:864px;position:absolute;}
+.main .right h3{height:76px;font:700 36px/72px "";color:#333;}
+.main .right p{height:72px;background:red;color:#Fff;font:700 36px/72px "";line-height: 72px;margin-bottom:100px;}
+.main .right #btn1{width:200px;height:50px;border:1px solid red;margin:20px;text-align:center;box-sizing: border-box;}
+.main .right #btn2{width:200px;height:50px;margin:20px;text-align:center;background:red;color:#fff;border:0;}

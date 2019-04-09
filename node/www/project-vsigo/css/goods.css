@@ -1,0 +1,140 @@
+#shortcut{background-color: #f2f2f2;height: 30px;color: #999;}
+#shortcut .yx_wrap{height: 16px;
+line-height: 20px;
+padding-top: 5px;
+width: 1190px;
+margin: auto}
+#shortcut .yx_wrap  .tel{float: left;width:353px;}
+#shortcut .yx_wrap  .tel .collect{float: left;
+width: 90px;}
+#shortcut .yx_wrap  .tel .l{float: left;}
+#shortcut .yx_wrap .tel .login{    float: left;
+    width: 200px;
+}
+#shortcut .yx_wrap .user_center{float: right;
+text-align: right;;}
+#shortcut .yx_wrap .user_center li{float: left;
+margin-left: 15px;}
+#shortcut .yx_wrap .user_center .shop{width:24px;height:24px;}
+#header{margin-top: 20px;
+margin-bottom: 20px;
+width: 1190px;
+height: 91px;
+margin: auto;
+}
+#header .logo_new{float: left;width: 230px;}
+#header .search{float: left;
+margin-left: 60px;height: 61px;
+padding-top: 30px;width:650px;}
+/////
+#header .search_bd{height: 40px;
+margin-bottom: 5px;
+overflow: hidden;box-sizing: border-box;}
+#header .search_bd input#txt{
+width: 510px;
+box-sizing: border-box;
+float:left;
+height: 40px;
+line-height: 40px;
+font-size: 14px;
+float: left;
+overflow: hidden;
+border:2px solid red;
+color: #999;
+background-color: #fff;
+font-family: Tahoma;}
+#header .search_bd .search_submit{
+
+font-weight: bold;
+border: none;
+letter-spacing: 3px;
+color: white;
+height: 40px;
+font-size: 18px;
+line-height: 40px;
+text-align: center;
+width: 131px;
+background:#c40000;
+float:left;}
+#header .hot_keywords{color: #6C6C6C;
+font-family: Microsoft YaHei;
+height: 16px;
+line-height: 16px;
+overflow: hidden;
+width: 90%;}
+#header .hot_keywords a{}
+#header .hot_keywords a.active{color:#d03845;}
+.menu_w{width: 100%;
+background: #DD2727;
+height: 37px;}
+#menu{width: 1190px;
+height: 36px;
+margin: auto;}
+#menu #allshort{width:200px;height:36px;float:left;position: relative;z-index: 1001;}
+#menu #allshort h2{width:200px;height:36px;background-color: #c40000;
+line-height: 36px;
+font-size: 14px;
+overflow: hidden;
+display: block;
+font-weight: bold;
+color:#fff;}
+#menu #allshort #allshortlist{background: #fff;height:320px;position: absolute;
+left: 0;
+top: 36px;
+width: 198px;
+background: #fff;
+z-index: 1000;
+}
+#menu #allshort #allshortlist .navlist{height: 64px;
+line-height: 26px;
+border-bottom: 1px solid #E8E8E8;
+box-sizing: border-box;position: relative;padding-left: 15px;
+font-size: 12px;
+z-index:0;
+}
+#menu #allshort #allshortlist .navlist.hover{background:#CCC;}
+#menu #allshort #allshortlist .navmore{
+	 display: none; 
+position: absolute;
+left: 197px;
+top: 0px;
+width: 700px;
+border: 1px solid #efefef;
+box-shadow: 1px 1px 10px #999;
+background: #fff;
+z-index: 0;
+overflow: hidden;}
+#menu #allshort #allshortlist .navlist b{background-position: -8px -0px;background: url(https://images.vsigo.cn/web/new/index_leftmenu.png) -8px 0 no-repeat;
+    background-position-x: -8px;
+    background-position-y: 0px;
+width: 39px;
+height: 64px;
+display: inline-block;
+position: absolute;
+left: 0;
+top: 0;}
+#menu #allshort #allshortlist .navlist h3{margin-left: 32px;
+height: 56px;
+padding-top: 8px;}
+#menu #allshort #allshortlist .navlist h3 a{color: #333333;
+font-size: 14px;
+font-weight: bold;
+font-family: Microsoft YaHei, "宋体";}
+#menu .navitems{padding-left: 5px;height:36px;width: 985px;
+float: right;}
+#menu .navitems .top_nav{width: 901px;float:left;}
+#menu .navitems .top_nav li{float:left;}
+#menu .navitems .top_nav li a{font:700 14px/36px "";color:#fff;padding:0 18px;}
+#menu .navitems .treasure{width:84px;height:36px;float:left;}
+
+#menu .navitems .treasure a{font-weight: bold;
+color: #fff;
+height: 35px;
+line-height: 35px;
+font-size: 14px;
+font-family: Microsoft YaHei;}
+.gondslist{width:100%;overflow:hidden;}
+.gondslist li{
+    float: left;
+    margin-bottom: 15px;
+    width: 14.28571%;}

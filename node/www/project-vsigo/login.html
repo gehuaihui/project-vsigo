@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<link href="css/public.css" rel="stylesheet" type="text/css">
+	<style>
+	    .margin{width:1024px;margin:0 auto;}
+		header{width: 100%;border-bottom: 1px solid #ccc;height:115px;padding: 10px 0px;}
+		main{width: 100%; background: #f5f5f5;height:600px;}
+		main .left{    float: left;width: 600px;height: 600px;}
+		.l_tips{    height: 30px;line-height: 30px;padding: 10px 0;}
+		.box{
+		width:405px;height:306px;
+		overflow: hidden;
+		position: relative;
+		margin-left: 200px;
+		}
+		.box .imgbox{position: absolute;width:405px;height:306px;}
+		.box .imgbox a {
+		   width:405px;sheight:306px;
+		    position: absolute;
+			left:780px;
+			top: 0;}
+		.box .imgbox a:nth-child(1){left:0}
+		.imgbox img{width:405px;sheight:306px;}
+		.c_form{   
+			float: left;
+			width: 360px;
+			height: 420px;
+			border: 1px solid #ccc;
+			margin: 50px 0 0 50px;
+			display: inline;
+			background: #ffffff;}
+			.c_form input{display:block;width:250px;height:37px;margin:35px auto;}
+	</style>
+	<body>
+		<header >
+			<div class="margin">
+				<a href="index.html" title="视客眼镜网官网">
+					<img src="https://images.vsigo.cn/web/logo_new.jpg" alt="视客眼镜网" title="视客眼镜网官网">
+				</a>
+			</div>
+			
+			
+		</header>
+		<main>
+			
+			<div class="margin">
+				<div class="left">
+					<div class="l_tips">
+						<span>现在注册</span>
+						<span style="font-size: 12px; color: #f00; margin: 0 0 0 10px;">送100金币（可直接抵现）</span>
+		           </div>
+				   	<div class="banner1 box">
+						<div class="imgbox">
+							<a href="#" target="_blank">
+								<img src="https://pic1.vsigo.cn/ADVP/780-320/2019329102836191.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+							</a>
+							<a href="#" target="_blank">
+																  <img src="https://pic5.vsigo.cn/ADVP/780-320/20194117855125.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+							</a>
+							<a href="#" target="_blank">
+								<img src="https://pic3.vsigo.cn/ADVP/780-320/20194318315693.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+							</a>
+						   <a href="#" target="_blank">
+								<img src="https://pic1.vsigo.cn/ADVP/780-320/201944221653351.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+						   </a>
+						   <a href="#" target="_blank">
+							   <img src="https://pic1.vsigo.cn/ADVP/780-320/2019213174245201.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+						   </a>
+						   <a href="#" target="_blank">
+							<img src="https://pic0.vsigo.cn/ADVP/780-320/20194316537180.jpg?v=2019040716" alt="" style="width:780px;height:320px">
+						   </a>
+						</div>
+				   </div>
+		
+				</div>
+				
+				<div class="c_form">
+					<input type="text" name="" id="user" value="" placeholder="用户名:"/>
+					<input type="text" name="" id="pass" value="" placeholder="密码:"/>
+					<input type="button" name="btn" id="btn" value="登录" /><span></span>
+				</div>
+		    </div>
+		</main>
+		
+		
+	</body>
+	<script src="js/jquery.2.2.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.banner.3.0.0.js"></script>
+	<script type="text/javascript">
+		var ouser = document.getElementById("user");
+		var opass = document.getElementById("pass");
+		var obtn = document.getElementById("btn");
+		obtn.onclick = function(){
+			$.ajax({
+				type:"get",
+				url:"http://localhost:8181/login",
+				data:{
+					user:ouser.value,
+					pass:opass.value
+				},
+				success:function(res){
+					console.log(res)
+					var obj= JSON.parse(res);
+					//console.log(obj)
+					switch(obj.code){
+						case  "1":
+						 $("span").html("用户名或者密码错误，请重新登陆");break;
+						case "0":
+					$("span").html("登录成功，三秒后返回首页");
+						setTimeout(()=>{location.href="index.html"},3000);
+						
+					}
+					
+				},
+				error:function(a,b,c){
+					console.log(a,b,c)
+					
+				}
+			})
+		}
+		$(".banner1").banner({
+			aimgs:$(" .banner1 .imgbox a"),//必传项
+			 leftbtn:$(".banner1 .btns #left"),//左按钮,可有可无
+			rightbtn:$(".banner1 .btns #right"),//左右按钮,可有可无,若无,便自动播放 */
+			//islist:true,//下面小图标,传就有,不传默认没有false
+			autopaly:true//是否自动播放,若没有左右按钮,默认自动播放,若有左右按钮,可有可无,默认不自动播放
+			 
+			
+			
+		});
+	</script>
+</html>
