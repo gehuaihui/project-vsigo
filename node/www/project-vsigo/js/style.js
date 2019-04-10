@@ -31,7 +31,7 @@
 						<img abc=${json[i].src} alt=${json[i].aval}>
 					</a>
 					<p class="pro_title">
-						<a href="#" target="_blank" ${json[i].aval}>${json[i].aval}</a>
+						<a href="#" target="_blank" titlt="${json[i].aval"}>${json[i].aval}</a>
 					</p>
 					<p class="pro_cx">
 						<span class="sprice">${json[i].span1}</span>
