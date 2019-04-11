@@ -6,6 +6,9 @@
 		<link href="css/public.css" rel="stylesheet" type="text/css">
 		<link href="css/goods.css" rel="stylesheet" type="text/css">
 	</head>
+	<style>
+		#btn{width:100px;height:40px;background:#00BFFF;color:#fff;text-align:center;font:20px/40px "";}
+	</style>
 	<body>
 			<body>
 				<div id="shortcut">
@@ -24,7 +27,7 @@
 						       <li><a href="#">帮助中心</a></li>
 						          <li><span>|</span></li>
 						         <li> <img src="https://www.vsigo.cn/images/head/maincart.png" class="shop"></li>
-						          <li><a href="#">购物车</a>
+						          <li><a href="car.html">购物车</a>
 						          <li><img src="https://www.vsigo.cn/images/head/phone.png" ></li>
 						         <li> <a id="#" href="#">手机版</a></li>
 						         <li> <img src="https://www.vsigo.cn/images/head/Customer.png"></li>
@@ -389,20 +392,21 @@
 			        <li><a class="font-14 bold" href="#">金币商城</a></li>
 			    </ul>
 			    <div class="treasure">
-			        <a href="#">去购物车结算</a>
+			        <a href="car.html"><mark>去购物车结算<mark></a>
 			    </div>
 			</div>
 		</div>
 		</div>
-		<ul class="gondslist">
+		<ul class="gondslist" id="cont">
 			
 		</ul>
 	</body>
 	<script src="js/jquery.2.2.4.js"></script>
-	<script src="js/goods.js"></script>
 	<script src="js/ajax.js"></script>
+	<script src="libs/ajax.3.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libs/cookie.js" type="text/javascript" charset="utf-8"></script>
 	<script>
-				function search(){
+	function search(){
 			//2.选择元素
 			this.txt=document.getElementById("txt");
 			this.list=document.getElementById("list");
@@ -410,7 +414,7 @@
 			//3.绑定事件
 			this.addevent();
 		}
-		search.prototype.addevent=function(){
+	search.prototype.addevent=function(){
 			var that=this;
 			this.txt.onkeyup=function(){
 			//4.保存输入框的内容
@@ -420,7 +424,7 @@
 				
 			}
 		}
-		search.prototype.load=function(){
+	search.prototype.load=function(){
 			var that=this;
 			jsonp(this.url,function(res){
 				that.res=res;
@@ -431,7 +435,7 @@
 				wd:this.v
 			});
 		}
-		search.prototype.display=function(){
+	search.prototype.display=function(){
 			console.log(this.res.s)
 			var str="";
 		    this.res.s.forEach(
@@ -443,33 +447,150 @@
 			
 			this.list.innerHTML=str;
 		}
-		new search();
-				
+	new search();
+	
+	class List{
+		constructor(options) {
+			//1.解析参数
+			this.cont = options.cont;
+			this.url = options.url;
+			this.clientH=options.clientH;
+			
+			 //2.请求数据
+			this.load();
+			//7.绑定事件
+			this.addevent();
+		}
+		load(){
+		     var that = this;
+			ajax({
+				url:this.url,
+			    success:function(res){
+		//		3.请求成功之后解析数据,并渲染页面
+				that.res = JSON.parse(res)
+				that.display()
+				}
+						})
+		}
+		display(){
+//				4.遍历数据,拼接结构,渲染页面
 			var str="";
-			for(var i=0;i<json.length;i++){
-				str=str+` <li>
-						<div class="hot_pro">
+			for(var i=0;i<this.res.length;i++){
+				str+=`
+				<li >
+						<div class="hot_pro"  index="${this.res[i].goodId}">
 							<a href="count.html" target="_blank">
-								<img src=${json[i].src} alt=${json[i].aval}>
+								<img abc="${this.res[i].src}" alt="${this.res[i].aval}">
 							</a>
 							<p class="pro_title">
-								<a href="#" target="_blank" ${json[i].aval}>${json[i].aval}</a>
+								<a href="#" target="_blank" titlt="${this.res[i].aval}">${this.res[i].aval}</a>
 							</p>
 							<p class="pro_cx">
-								<span class="sprice">${json[i].span1}</span>
-								<span class="cxtag">${json[i].span2}</span>
+								<span class="sprice">${this.res[i].span1}</span>
+								<span class="cxtag">${this.res[i].span2}</span>
 							</p>
 							<p class="pro_comm">
-								<span class="comm_num">${json[i].span3}</span>
+								<span class="comm_num">${this.res[i].span3}</span>
 								评论
 								<span class="sep">|</span>
-								<span class="comm_num">${json[i].span4}</span>
+								<span class="comm_num">${this.res[i].span4}</span>
 								好评
 							</p>
-							</div>
-					</li>`
+							<input type="button" value="加入购物车" id="btn"/>
+						</div>
+					</li>`;
+				this.cont.innerHTML=str;}
+				//5.判断是否在可视区域内，进行懒加载,在可视区域内出现，不在不出现
+				//6.执行滚动事件，滚动过程中，进行懒加载
+			   this.Lazyload()
+			   this.scroll()
+			}//这里是display结束的
+			
+			Lazyload(){
+				var aimg = document.querySelectorAll("#cont img");
+				for(var i=0;i<aimg.length;i++){	
+						
+					     var imgT = aimg[i].offsetTop;
+						if(this.clientH > imgT){
+						aimg[i].src = aimg[i].getAttribute("abc");
+					}
+				}
+			}//这里是Lazyload结束
+			scroll(){
+				var aimg = document.querySelectorAll("#cont img");
+				var that=this;
+					document.onscroll = function(){
+						var t=document.documentElement.scrollTop
+							for(var i=0;i<aimg.length;i++){	
+								var imgT = aimg[i].offsetTop;
+									if(that.clientH + t > imgT){
+									aimg[i].src = aimg[i].getAttribute("abc");
+								}
+							}
+						
+					}
 				
-			}
-		$(".gondslist").html(str);
+			}//这里是滚动结束
+			addevent(){
+				var that=this;
+				this.cont.addEventListener("click",function(eve){
+					var e=eve||window.event;
+					var target=e.target||e.srcElement;
+					if(target.nodeName=="INPUT"){
+						//8.被点击时,获取货号,存cookie[{},{}]
+						that.id = target.parentNode.getAttribute("index");
+					
+					
+						that.setCookie()
+					}
+					
+				})
+			}//绑定结束
+			setCookie(){
+			//				因为要使用一条cookie存商品,所以数据选择数组里面放对象[{},{}]
+							this.goods = getCookie("goods");
+			//				情况1:第一次添加
+							if(this.goods == ""){
+								this.goods = [{
+									id:this.id,
+									num:1
+								}];
+							}else{
+			//					情况2:不是第一次添加
+								this.goods = JSON.parse(this.goods);
+			//					新情况1：这次点击的是老数据
+								var onoff = true;
+								this.goods.forEach((v)=>{
+									if(v.id == this.id){
+										v.num++
+										onoff = false;
+									}
+								})
+								
+			//					新情况2：这次点击的是新数据
+								if(onoff){
+									this.goods.push({
+										id:this.id,
+										num:1
+									})
+								}
+							}
+			//				所有关于数组的操作结束之后,将数组转成字符再设置到cookie中
+							setCookie("goods",JSON.stringify(this.goods))
+		}
+			
+			
+			
+	}
+	
+	new List({
+		
+		clientH:document.documentElement.clientHeight,
+		cont:document.getElementById("cont"),
+		url:"http://localhost/project-vsigo/data/goods.json"
+	})
+
+
+
 	</script>
 </html>

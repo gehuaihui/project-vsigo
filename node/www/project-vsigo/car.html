@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	    <style type="text/css">
+				img{width: 60px;}
+				h2{margin: 30px 0;text-indent: 30px;}
+				em{display: block;width: 100px;line-height: 30px;text-align: center;background: deepskyblue;border-radius: 6px;margin: 0 auto;margin-top: 10px;font-style: normal;cursor: pointer;color: #fff;}
+				input[type="number"]{width:50px}
+		</style>
+	</head>
+	<body>
+		<h3>这是结算页面<a href="goods.html"><mark>继续去购物</mark></a></h3>
+		<table border="1" cellspacing="0" width="1000" align="center">
+			<thead>
+				<tr>
+					<th></th>
+					<th width="100">商品图片</th>
+					<th>名字</th>
+					<th>价格</th>
+					<th width="120">数量</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<!--<tr>
+					<td><input type="checkbox" name="" id="" value="" /></td>
+					<td><img src=""/></td>
+					<td>名字</td>
+					<td>价格</td>
+					<td>1</td>
+					<td><em data-index="">删除</em></td>
+				</tr>-->
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"><input type="checkbox" name="" id="" value="" />全部选中</td>
+					<td align="right">总价：</td>
+					<td>3344</td>
+					<td>总数量：10</td>
+					<td><em>全部删除</em></td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+	<script src="libs/ajax.3.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="libs/cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		class Car{
+			//1.解析数据
+			constructor(options) {
+				this.url=options.url;
+				this.tbody=options.tbody;
+			    	//2.请求数据
+				this.load()
+				//5.绑定事件
+				this.addevent()
+			}
+			load(){
+				var that=this;
+				ajax({
+					url:this.url,
+					success:function(res){
+						that.res=JSON.parse(res)
+						//3.获取cookie
+						that.getcookie()
+						//console.log(that.res)
+					}
+				})
+			}
+			getcookie(){
+				this.goods=JSON.parse(getCookie("goods"));
+				//4.渲染页面
+				this.display()
+			}
+			display(){
+				var str="";
+				for(var i=0;i<this.res.length;i++){
+					for(var j=0;j<this.goods.length;j++){
+						if(this.goods[j].id==this.res[i].goodId){
+							
+							str+=`
+							<tr>
+					            <td><input type="checkbox" name="" id="" value="" /></td>
+					            <td><img src="${this.res[i].src}"/></td>
+					            <td>${this.res[i].aval}</td>
+					            <td>${this.res[i].span1}</td>
+					            <td><input type="number" value="${this.goods[j].num}"/ ></td>
+					            <td><em data-index="${this.goods[j].id}">删除</em></td>
+				            </tr>`
+						}
+					}
+				}
+				this.tbody.innerHTML=str;
+			}//渲染结束
+			
+			addevent(){
+				var that=this;
+				this.tbody.addEventListener("click",function(eve){
+					var e=eve||window.event;
+					var target=e.target||e.srcElement;
+					if(target.nodeName=="EM"){
+						//						找到点击商品的货号
+						that.id=target.getAttribute("data-index");
+						//						删除DOM元素
+						target.parentNode.parentNode.remove()
+						//						6.遍历cookie,找到符合条件的数据,做删除
+						that.removecookie()
+					}
+					
+				})
+			}
+			removecookie(){
+				for(var i=0;i<this.goods.length;i++){
+					if(this.goods[i].id==this.id){
+						break;
+						
+					}
+					
+					
+				}
+				this.goods.splice(i,1)
+				setCookie("goods",JSON.stringify(this.goods))
+				
+			}//删除cookie结束
+			
+		
+		}
+		new Car({
+			url:"data/goods.json",
+			tbody:document.getElementById("tbody")
+			
+		})
+	</script>
+</html>

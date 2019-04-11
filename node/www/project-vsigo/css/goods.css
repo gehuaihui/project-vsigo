@@ -1,3 +1,4 @@
+@charset "utf-8";
 #shortcut{background-color: #f2f2f2;height: 30px;color: #999;}
 #shortcut .yx_wrap{height: 16px;
 line-height: 20px;
@@ -12,7 +13,7 @@ width: 90px;}
     width: 200px;
 }
 #shortcut .yx_wrap .user_center{float: right;
-text-align: right;;}
+text-align: right;}
 #shortcut .yx_wrap .user_center li{float: left;
 margin-left: 15px;}
 #shortcut .yx_wrap .user_center .shop{width:24px;height:24px;}
